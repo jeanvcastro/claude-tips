@@ -92,11 +92,16 @@ Exemplo de uso: `usage-examples/05-browser-copilot.md`
 
 Para POCs, protótipos e código descartável. Loop autônomo sem review humano.
 
-Usa o [Ralph](https://github.com/snarktank/ralph) — um padrão de loop onde cada iteração roda com **contexto fresco**. A memória entre iterações persiste apenas por commits no Git, `progress.txt` e `prd.json`. Erros de uma iteração não contaminam a próxima.
+Usa o [Ralph](https://github.com/snarktank/ralph) — um padrão de loop onde cada iteração roda com **contexto fresco**. Você define um PRD (Product Requirements Document) com user stories pequenas e testáveis, converte para `prd.json`, e o Ralph itera automaticamente: pega a próxima story pendente, implementa, roda os testes, commita se passou, e segue para a próxima. A memória entre iterações persiste apenas por commits no Git, `progress.txt` e `prd.json` — erros de uma iteração não contaminam a próxima.
 
 Fluxo:
 ```
-PRD com stories pequenas → prd.json → Ralph loop → implementa + testa → commit → próxima story → repete
+PRD com stories pequenas → prd.json → Ralph loop:
+  ├─ Pega story com passes: false (por prioridade)
+  ├─ Implementa + roda testes
+  ├─ Passou → commit automático, marca passes: true
+  ├─ Falhou → registra em progress.txt, tenta de novo com contexto fresco
+  └─ Repete até todas as stories passarem
 ```
 
 Quando usar: POCs, exploração técnica, código descartável.
