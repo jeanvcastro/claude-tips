@@ -90,7 +90,9 @@ Exemplo de uso: `usage-examples/05-browser-copilot.md`
 
 ### Modo 4: Go-Horse com Ralph Loops
 
-Para POCs, protótipos e código descartável. Loop autônomo sem review humano.
+Para MVPs, protótipos e código descartável com muitas tarefas. Loop autônomo sem review humano.
+
+Para POCs rápidas, o Modo 1 com auto-accept já resolve bem. Ralph loops fazem sentido quando o projeto tem **muitas stories** — você define o PRD, roda o loop, vai dormir, e no dia seguinte avalia: se ficou bom, segue; se ficou ruim, joga fora e recomeça.
 
 Usa o [Ralph](https://github.com/snarktank/ralph) — um padrão de loop onde cada iteração roda com **contexto fresco**. Você define um PRD (Product Requirements Document) com user stories pequenas e testáveis, converte para `prd.json`, e o Ralph itera automaticamente: pega a próxima story pendente, implementa, roda os testes, commita se passou, e segue para a próxima. A memória entre iterações persiste apenas por commits no Git, `progress.txt` e `prd.json` — erros de uma iteração não contaminam a próxima.
 
@@ -104,7 +106,7 @@ PRD com stories pequenas → prd.json → Ralph loop:
   └─ Repete até todas as stories passarem
 ```
 
-Quando usar: POCs, exploração técnica, código descartável.
+Quando usar: MVPs, protótipos com muitas tasks, código descartável que pode rodar overnight.
 Quando NÃO usar: produção, mudanças arquiteturais, segurança.
 
 Exemplo de uso: `usage-examples/04-ralph-loop-poc.md`
@@ -159,7 +161,7 @@ A pasta `output/` é gitignored. Cada pessoa que rodar os exemplos terá resulta
 │                 Jira, Grafana, Datadog, Sentry        │
 │                                                      │
 │  DESCARTÁVEL →  Modo 4: Ralph loops                  │
-│                 POCs, protótipos, código experimental │
+│                 MVPs, protótipos, rodar overnight     │
 │                                                      │
 └──────────────────────────────────────────────────────┘
 ```
