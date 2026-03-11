@@ -110,7 +110,7 @@ Exemplo de uso: `usage-examples/04-ralph-loop-poc.md`
 
 Antes de usar os exemplos, aplique as configurações globais documentadas em `global-config-guide.md`. Resumo:
 
-- **`~/.claude/settings.json`** — permissões amplas para ferramentas do dia a dia, deny list para ações destrutivas
+- **`~/.claude/settings.json`** — permissões de leitura e navegação globais, escrita configurada por projeto/modo
 - **`~/.claude/CLAUDE.md`** — instruções globais: idioma, estilo conciso, estratégia de modelos, seção "NÃO FAÇA"
 - **`~/.claude/settings.local.json`** — limpar periodicamente (acumula permissões de sessões antigas)
 - **Estratégia de modelos** — Haiku para buscas triviais, Sonnet para análise, Opus para implementação complexa

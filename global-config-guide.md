@@ -6,25 +6,20 @@
 
 Configurações globais que valem para TODOS os projetos.
 
-### Permissões Amplas
+### Permissões de Leitura + Deny List
 
-Cada vez que o Claude para e pede permissão, gasta tokens na ida e volta.
-Configurar permissões amplas para ferramentas do dia a dia e restringir só ações destrutivas.
+A config global libera apenas ferramentas de **leitura e navegação**. Permissões de escrita (`Write`, `Edit`) ficam de fora intencionalmente — cada modo de trabalho configura isso no nível do projeto conforme a necessidade de review.
 
 ```json
 {
   "permissions": {
     "allow": [
       "Read",
-      "Write",
-      "Edit",
       "Glob",
       "Grep",
       "Bash(git status)",
       "Bash(git diff*)",
       "Bash(git log*)",
-      "Bash(git add*)",
-      "Bash(git commit*)",
       "Bash(go build*)",
       "Bash(go test*)",
       "Bash(go run*)",
@@ -32,8 +27,6 @@ Configurar permissões amplas para ferramentas do dia a dia e restringir só aç
       "Bash(go fmt*)",
       "Bash(go mod*)",
       "Bash(ls*)",
-      "Bash(mkdir*)",
-      "Bash(cat*)",
       "Bash(which*)",
       "Bash(echo*)",
       "Agent"
@@ -49,10 +42,11 @@ Configurar permissões amplas para ferramentas do dia a dia e restringir só aç
 }
 ```
 
-### Por que isso importa
-- Cada interrupção de permissão = ~500-1000 tokens desperdiçados
-- O fluxo do agente quebra, ele precisa re-analisar contexto após cada pausa
-- Deny list protege contra ações destrutivas
+### Por que Write/Edit não estão aqui
+- No **Modo 1 (Engenheiro Cuidadoso)**, você precisa revisar cada diff — auto-accept de escrita inviabiliza isso
+- Nos **Modos 2 e 3**, o Claude propõe e você valida — review humano continua importante
+- No **Modo 4 (Ralph Loops)**, faz sentido liberar tudo — mas isso vai no settings local do projeto, não no global
+- Deny list protege contra ações destrutivas em qualquer modo
 
 ---
 
@@ -138,7 +132,7 @@ projeto/
 1. **CLAUDE.md enxuto** — o Claude consulta o código quando precisa de detalhes, não precisa carregar tudo no contexto
 2. **Sessões curtas e focadas** — em vez de conversas longas, iniciar nova sessão por tarefa
 3. **outputStyle: "concise"** — respostas mais curtas
-4. **Permissões amplas** — menos interrupções = menos tokens na ida/volta
+4. **Permissões de leitura globais** — escrita liberada só por projeto/modo conforme necessidade
 5. **Modelos certos para tarefas certas** — Haiku para buscas, Sonnet para análise, Opus para implementação
 
 ---

@@ -204,6 +204,43 @@ Erros de uma iteração não contaminam a próxima.
 Story boa: "Adicionar endpoint GET /health que retorna 200"
 Story ruim: "Construir sistema de autenticação completo"
 
+### Permissões para Ralph Loops
+
+O Ralph precisa de autonomia total — ele escreve, commita e testa sem intervenção. Use um `settings.json` local no projeto com permissões amplas de escrita:
+
+```json
+// .claude/settings.json (no projeto do Ralph loop)
+{
+  "permissions": {
+    "allow": [
+      "Write",
+      "Edit",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(mkdir*)",
+      "Bash(cat*)"
+    ]
+  }
+}
+```
+
+Essas permissões se somam às globais (que já cobrem leitura, testes e navegação).
+
+### Flag --dangerously-skip-permissions
+
+Na prática, muita gente roda Ralph loops com `--dangerously-skip-permissions` para eliminar qualquer interrupção. Isso pula **todas** as verificações de permissão, incluindo a deny list.
+
+Se for usar essa flag, rode dentro de um **container descartável** (Docker, devcontainer) para limitar o blast radius. O Ralph já é para código descartável — trate o ambiente também como descartável.
+
+```bash
+# Exemplo com Docker
+docker run --rm -v $(pwd):/app -w /app [imagem] \
+  claude --dangerously-skip-permissions
+
+# Dentro do container, o Ralph roda sem freio
+./scripts/ralph/ralph.sh --tool claude 10
+```
+
 ### Executar
 ```bash
 ./scripts/ralph/ralph.sh --tool claude [max_iterations]
