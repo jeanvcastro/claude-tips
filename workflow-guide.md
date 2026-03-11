@@ -75,22 +75,40 @@ Como invocar:
 Use o agente d2-diagram-architect para criar um diagrama de [descrição]
 ```
 
-#### Code Reviewer
+#### Code Reviewer (self-review pre-PR)
 Arquivo: `.claude/agents/code-reviewer.md`
 
-Um agente que lança 4 subagentes em paralelo na branch atual:
+Agente de self-review que lança 4 subagentes em paralelo para analisar SUAS mudanças na branch atual antes de abrir PR:
 - **Performance** — complexidade, alocações, goroutine leaks, N+1
 - **Segurança** — injection, auth bypass, secrets, CVEs
 - **Infraestrutura** — graceful shutdown, timeouts, circuit breakers, observabilidade
 - **Qualidade** — convenções da linguagem, testes, estrutura, error handling
 
 Consolida num relatório classificado por severidade (CRITICAL/WARNING/SUGGESTION).
-Roda como review automatizado antes de abrir PR.
+Roda como self-review antes de abrir PR. Auto-detecta a branch base ou aceita uma explicitamente.
 
 Como invocar:
 ```
 Use o agente code-reviewer para fazer review das mudanças na branch atual
+
+# Ou especificando a branch base:
+Use o agente code-reviewer para revisar as mudanças contra a branch develop
 ```
+
+#### Review de PRs de terceiros (sem agente)
+
+O agente code-reviewer é para self-review — revisar SUAS mudanças antes de abrir PR. Para revisar PRs de outras pessoas, use o `gh` diretamente no Claude Code:
+
+```
+# Revisar uma PR aberta
+Leia o diff da PR #42 com `gh pr diff 42` e faça um code review focado em
+performance, segurança e qualidade. Aponte problemas com arquivo e linha.
+
+# Revisar e já comentar na PR
+Leia a PR #42, faça review, e poste os findings como review comment no GitHub.
+```
+
+O Claude lê o diff via `gh pr diff`, analisa o código, e pode postar comentários diretamente na PR com `gh pr review`. Não precisa de agente — o contexto de uma PR já é focado o suficiente.
 
 ### Criando seus próprios agentes
 Qualquer `.md` em `.claude/agents/` vira um agente invocável. Estrutura:
