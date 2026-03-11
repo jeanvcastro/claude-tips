@@ -16,6 +16,8 @@ Para código de produção. Controle humano total, qualidade garantida.
 
 ### Fluxo
 
+Quase um PDCA (Plan-Do-Check-Act/Adjust)
+
 ```
 1. PLANEJAR  →  Claude cria plano em .claude/task_plan.md
 2. EXECUTAR  →  Task por task, revisando cada diff
