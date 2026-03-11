@@ -48,6 +48,7 @@ Para código de produção. Controle humano total.
 
 - **Sem auto-accept** — revisar cada diff antes de aceitar
 - **Diff lado a lado na IDE** — usar as extensões do Claude Code para VS Code ou JetBrains que mostram diff visual a cada edição, permitindo aceitar/rejeitar mudanças individualmente
+- **Terminal externo, não o da IDE** — rodar o Claude num terminal separado (iTerm, WezTerm, etc.) e conectar na IDE com `/ide`. Se a IDE crashar, o contexto do Claude sobrevive. O diff continua funcionando normalmente
 - **Plano em arquivo local** (`.claude/task_plan.md`) — fonte de verdade do progresso
 - **Claude atualiza o plano** a cada task concluída antes de seguir para a próxima
 - **Sessões curtas** — antes do contexto estourar, pedir prompt de continuidade, `/clear`, e colar na nova sessão
@@ -64,14 +65,14 @@ Exemplo de uso: `usage-examples/01-careful-workflow.md`
 
 Para tarefas que não são codificação direta: review de PR, geração de diagramas, documentação técnica. O agente faz o trabalho pesado, você valida o resultado.
 
-**Agentes incluídos:**
+Qualquer `.md` em `.claude/agents/` vira um agente invocável pelo Claude Code. Pode ser um agente simples (prompt direto) ou um agente que orquestra subagentes especialistas. Dois exemplos incluídos:
 
-| Agente | O que faz |
-|--------|-----------|
-| `d2-diagram-architect` | Cria diagramas D2 profissionais com paleta de cores, ícones AWS e labels descritivos |
-| `code-reviewer` | Lança 4 subagentes em paralelo (performance, segurança, infraestrutura, qualidade) e consolida num relatório classificado por severidade |
+| Agente | Tipo | O que faz |
+|--------|------|-----------|
+| `d2-diagram-architect` | Simples | Cria diagramas D2 profissionais com paleta de cores, ícones AWS e labels descritivos |
+| `code-reviewer` | Com subagentes | Lança 4 subagentes em paralelo (performance, segurança, infraestrutura, qualidade) e consolida num relatório classificado por severidade |
 
-Os agentes vivem em `.claude/agents/` e podem ser copiados para qualquer projeto. Qualquer `.md` nessa pasta vira um agente invocável pelo Claude Code.
+Copie esses para seu projeto ou crie seus próprios agentes — o formato é só um `.md` com as instruções.
 
 Exemplos de uso: `usage-examples/02-d2-diagram-agent.md` e `usage-examples/03-code-review-agent.md`
 
