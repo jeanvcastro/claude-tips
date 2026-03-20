@@ -78,7 +78,7 @@ Use o agente d2-diagram-architect para criar um diagrama de [descrição]
 ```
 
 #### Code Reviewer (self-review pre-PR)
-Arquivo: `.claude/agents/code-reviewer.md`
+Arquivo: `.claude/agents/go-code-reviewer.md`
 
 Agente de self-review que lança 4 subagentes em paralelo para analisar SUAS mudanças na branch atual antes de abrir PR:
 - **Performance** — complexidade, alocações, goroutine leaks, N+1
@@ -91,15 +91,15 @@ Roda como self-review antes de abrir PR. Auto-detecta a branch base ou aceita um
 
 Como invocar:
 ```
-Use o agente code-reviewer para fazer review das mudanças na branch atual
+Use o agente go-code-reviewer para fazer review das mudanças na branch atual
 
 # Ou especificando a branch base:
-Use o agente code-reviewer para revisar as mudanças contra a branch develop
+Use o agente go-code-reviewer para revisar as mudanças contra a branch develop
 ```
 
 #### Review de PRs de terceiros (sem agente)
 
-O agente code-reviewer é para self-review — revisar SUAS mudanças antes de abrir PR. Para revisar PRs de outras pessoas, use o `gh` diretamente no Claude Code:
+O agente go-code-reviewer é para self-review — revisar SUAS mudanças antes de abrir PR. Para revisar PRs de outras pessoas, use o `gh` diretamente no Claude Code:
 
 ```
 # Revisar uma PR aberta

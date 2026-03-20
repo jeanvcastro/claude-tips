@@ -19,7 +19,7 @@ claude-tips/
 ├── .claude/
 │   └── agents/                        # Agentes prontos para copiar em qualquer projeto
 │       ├── d2-diagram-architect.md    # Gera diagramas D2 de arquitetura
-│       └── code-reviewer.md           # Review multi-disciplinar antes da PR
+│       └── go-code-reviewer.md           # Review multi-disciplinar antes da PR
 │
 ├── usage-examples/                    # Exemplos de uso de cada workflow
 │   ├── 01-careful-workflow.md         # Engenheiro cuidadoso: plano + task-by-task
@@ -70,7 +70,7 @@ Qualquer `.md` em `.claude/agents/` vira um agente invocável pelo Claude Code. 
 | Agente | Tipo | O que faz |
 |--------|------|-----------|
 | `d2-diagram-architect` | Simples | Cria diagramas D2 profissionais com paleta de cores, ícones AWS e labels descritivos |
-| `code-reviewer` | Com subagentes | Lança 4 subagentes em paralelo (performance, segurança, infraestrutura, qualidade) e consolida num relatório classificado por severidade |
+| `go-code-reviewer` | Com subagentes | Lança 4 subagentes em paralelo (performance, segurança, infraestrutura, qualidade) e consolida num relatório classificado por severidade |
 
 Copie esses para seu projeto ou crie seus próprios agentes — o formato é só um `.md` com as instruções.
 

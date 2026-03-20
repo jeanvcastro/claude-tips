@@ -2,7 +2,7 @@
 
 ## Contexto
 Demonstra o review multi-disciplinar antes de abrir PR.
-O agente code-reviewer lança 4 subagentes em paralelo (performance, segurança, infraestrutura, qualidade) e consolida num relatório.
+O agente go-code-reviewer lança 4 subagentes em paralelo (performance, segurança, infraestrutura, qualidade) e consolida num relatório.
 
 ## Pré-requisito
 - Ter rodado o cenário 01 com as mudanças commitadas numa branch
@@ -20,7 +20,7 @@ git checkout -b feature/add-middlewares
 ## Prompt
 
 ```
-Use o agente code-reviewer para fazer review completo das mudanças na branch atual comparando com main.
+Use o agente go-code-reviewer para fazer review completo das mudanças na branch atual comparando com main.
 
 Rode os 4 subagentes em paralelo:
 - Performance: complexidade, alocações, goroutine leaks, N+1
